@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:baselineAligned="false"
+    android:divider="?android:attr/dividerHorizontal"
+    android:orientation="horizontal"
+    android:showDividers="middle"
+    tools:context="com.example.mannas.capstone.BookListActivity"
+    android:id="@+id/fragment_main">
+
+
+    <RelativeLayout
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+
+        >
+        <ScrollView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/master"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+            <include layout="@layout/fragment_book_list_master"/>
+        </ScrollView>
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_test_ad_unit_id"
+            />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/detail"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2" />
+
+
+</LinearLayout>

@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Capstone</string>
+    <string name="search">Search</string>
+
+    <string name="search_hint">Search Books</string>
+    <string name="title_book_detail">Book Detail</string>
+    <string name="web_view">web view</string>
+
+    <string name="book_image_description">book mage description</string>
+    <string name="book_download">book download</string>
+    <string name="getting_links">getting links</string>
+    <string name="error">error</string>
+    <string name="authors">Authors</string>
+    <string name="related_subjects">Related Subjects</string>
+    <string name="downloads">Downloads</string>
+    <string name="available_offline">Available Offline</string>
+    <string name="published">Published :- </string>
+    <string name="is">IS </string>
+    <string name="pages"> Pages.</string>
+    <string name="n_a">N/A</string>
+    <string name="offline_mode">Offline Mode</string>
+    <string name="view_online">View Online</string>
+    <string name="load_more">Load More</string>
+    <string name="loading">Loading ...</string>
+    <string name="sorry_nothing_to_show">sorry, nothing to show \n try another keyword</string>
+    <string name="sorry_the_selected_subject_is_empty">Sorry the selected Subject is empty \n select another subject</string>
+    <string name="banner_ad_unit_id">ca-app-pub-5873815811548370/6526216575</string>
+    <string name="banner_test_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_app_id">ca-app-pub-5873815811548370~6872032635</string>
+    <string name="options">options</string>
+    <string name="no_downloads">No Downloads</string>
+    <string name="suggested_books">Suggested Books</string>
+    <string name="another">load another</string>
+
+
+</resources>

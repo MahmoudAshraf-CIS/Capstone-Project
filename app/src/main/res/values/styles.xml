@@ -1,0 +1,69 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="article_title" parent="TextAppearance.AppCompat.Subhead" >
+        <item name="android:textColor">@color/txtTitle</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="article_subtitle" parent="TextAppearance.AppCompat.Body1" >
+        <item name="android:textColor">@color/txtSubTitle</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+
+
+
+    <style name="TextView_Medium_Link" >
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:color"> #0B0080 </item>
+        <item name="android:textColor"> @color/cardview_dark_background </item>
+    </style>
+
+    <style name="TextView_Medium_Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:color"> @color/cardview_dark_background</item>
+        <item name="android:textColor"> @color/cardview_dark_background </item>
+    </style>
+    <style name="TextView_Larg" >
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:color"> @color/cardview_dark_background</item>
+        <item name="android:textColor"> @color/cardview_dark_background </item>
+    </style>
+
+    <style name="TextView_Medium" >
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:color"> @color/cardview_dark_background</item>
+        <item name="android:textColor"> @color/cardview_dark_background </item>
+    </style>
+    <style name="TextView_Small_Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:color"> @color/cardview_dark_background</item>
+        <item name="android:textColor"> @color/cardview_dark_background </item>
+    </style>
+
+    <style name="TextView_Small" >
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:color"> @color/cardview_dark_background</item>
+        <item name="android:textColor"> @color/cardview_dark_background </item>
+    </style>
+</resources>
