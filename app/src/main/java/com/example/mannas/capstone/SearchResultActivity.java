@@ -30,6 +30,7 @@ import com.example.mannas.capstone.connection.ConnectionListener;
 import com.example.mannas.capstone.data.Loaders.BookDetailLoader;
 import com.example.mannas.capstone.data.Loaders.SearchLoader;
 import com.example.mannas.capstone.data.Util.Doc;
+import com.example.mannas.capstone.data.Util.Work;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.squareup.picasso.Picasso;
@@ -46,31 +47,38 @@ import co.lujun.androidtagview.TagContainerLayout;
 
 public class SearchResultActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<SearchLoader.SearchResult>,
-        ConnectionListener
-{
+        ConnectionListener {
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
     public static final String QUERY_KEY = "query";
-    protected boolean mTwoPane;
     protected final Integer SearchReasultLoader_ID_initial = 1;
     protected final Integer SearchReasultLoader_ID_newQuery = 2;
     protected final Integer SearchReasultLoader_ID_more = 3;
-
+    protected boolean mTwoPane;
     protected SearchResultActivity.SimpleItemRecyclerViewAdapter adapter;
 
-    @BindView(R.id.activity_main_book_list) CoordinatorLayout SearchResultActivity;
+    @BindView(R.id.activity_main_book_list)
+    CoordinatorLayout SearchResultActivity;
 
-    @BindView(R.id.content_master) View mainFragment_content;
-        @BindView(R.id.wraper_subjects) View wraper_subjects;
-        @BindView(R.id.nothing_to_show) View nothingToShow;
-        @BindView(R.id.wraper_recycler) View wraper_recycler;
-    @BindView(R.id.loading_indicator) View loadingIndicator;
+    @BindView(R.id.content_master)
+    View mainFragment_content;
+    @BindView(R.id.wraper_subjects)
+    View wraper_subjects;
+    @BindView(R.id.nothing_to_show)
+    View nothingToShow;
+    @BindView(R.id.wraper_recycler)
+    View wraper_recycler;
+    @BindView(R.id.loading_indicator)
+    View loadingIndicator;
 
-    @BindView(R.id.offline_sign) View offline_sign;
-    @BindView(R.id.subjects_tag_view) TagContainerLayout subjects_tag_view;
-    @BindView(R.id.load_more) Button moreBtn;
+    @BindView(R.id.offline_sign)
+    View offline_sign;
+    @BindView(R.id.subjects_tag_view)
+    TagContainerLayout subjects_tag_view;
+    @BindView(R.id.load_more)
+    Button moreBtn;
 
     Integer page;
     String subject;
@@ -84,7 +92,7 @@ public class SearchResultActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Search Result");
+        toolbar.setTitle(getResources().getString(R.string.search_result));
 
 
         View recyclerView = findViewById(R.id.main_recycler);
@@ -92,17 +100,17 @@ public class SearchResultActivity extends AppCompatActivity
         setupRecyclerView((RecyclerView) recyclerView);
         wraper_subjects.setVisibility(View.GONE);
 
-        if(getIntent()!=null && getIntent().getExtras()!=null){
+        if (getIntent() != null && getIntent().getExtras() != null) {
             subject = getIntent().getExtras().getString(QUERY_KEY);
-            if(subject!=null){
-                subject = subject.replace(' ','+');
+            if (subject != null) {
+                subject = subject.replace(' ', '+');
                 subject = subject.toLowerCase();
                 page = 0;
-                getSupportLoaderManager().restartLoader(SearchReasultLoader_ID_initial,null,this).forceLoad();
-            }else{
-                if(snackbar!=null)
+                getSupportLoaderManager().restartLoader(SearchReasultLoader_ID_initial, null, this).forceLoad();
+            } else {
+                if (snackbar != null)
                     snackbar.dismiss();
-                snackbar = Snackbar.make(SearchResultActivity, "Not valid keyword !\n try again.", Snackbar.LENGTH_LONG);
+                snackbar = Snackbar.make(SearchResultActivity,getResources().getString(R.string.not_valid_keyword)  , Snackbar.LENGTH_LONG);
                 snackbar.show();
             }
         }
@@ -115,22 +123,23 @@ public class SearchResultActivity extends AppCompatActivity
         setAdsView();
     }
 
-    protected void setOfflineSign(){
-       if(offline_sign!=null){
-           Boolean isOffline;
-           ConnectivityManager connManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-           NetworkInfo info = connManager.getActiveNetworkInfo();
-           if(info==null){
-               isOffline= true;
-           }else {
-               isOffline = !info.isConnected();
-           }
-           OnConnectionStateChanged(isOffline);
-       }
+    protected void setOfflineSign() {
+        if (offline_sign != null) {
+            Boolean isOffline;
+            ConnectivityManager connManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo info = connManager.getActiveNetworkInfo();
+            if (info == null) {
+                isOffline = true;
+            } else {
+                isOffline = !info.isConnected();
+            }
+            OnConnectionStateChanged(isOffline);
+        }
     }
-    protected void setSearchView(){
+
+    protected void setSearchView() {
         final SearchView searchView = (SearchView) findViewById(R.id.search);
-        searchView.setQuery(subject,false);
+        searchView.setQuery(subject, false);
 
         // Sets searchable configuration defined in searchable.xml for this SearchView
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -138,13 +147,13 @@ public class SearchResultActivity extends AppCompatActivity
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if(query!=null){
-                    subject = query.replace(' ','+');
+                if (query != null) {
+                    subject = query.replace(' ', '+');
                     subject = subject.toLowerCase();
-                    page=0;
-                    getSupportLoaderManager().restartLoader(SearchReasultLoader_ID_newQuery,null,SearchResultActivity.this).forceLoad();
+                    page = 0;
+                    getSupportLoaderManager().restartLoader(SearchReasultLoader_ID_newQuery, null, SearchResultActivity.this).forceLoad();
 
-                    ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE))
+                    ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
                             .hideSoftInputFromWindow(searchView.getWindowToken(), 0);
 
                 }
@@ -157,7 +166,8 @@ public class SearchResultActivity extends AppCompatActivity
             }
         });
     }
-    protected void setAdsView(){
+
+    protected void setAdsView() {
         AdView mAdView = (AdView) findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
@@ -167,10 +177,11 @@ public class SearchResultActivity extends AppCompatActivity
                 .build();
         mAdView.loadAd(adRequest);
     }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList(BookListActivity.SimpleItemRecyclerViewAdapter.DATA_SET_KEY  , adapter.getDataSet());
-        outState.putString("subject",subject);
+        outState.putParcelableArrayList(BookListActivity.SimpleItemRecyclerViewAdapter.DATA_SET_KEY, adapter.getDataSet());
+        outState.putString("subject", subject);
         outState.putInt("page", page);
     }
 
@@ -181,21 +192,21 @@ public class SearchResultActivity extends AppCompatActivity
         page = savedInstanceState.getInt("page");
 
         ArrayList<Doc> ls = savedInstanceState.getParcelableArrayList(BookListActivity.SimpleItemRecyclerViewAdapter.DATA_SET_KEY);
-        if(adapter!=null)
+        if (adapter != null)
             adapter.changeDataSet(ls);
         else
-            getSupportLoaderManager().restartLoader(SearchReasultLoader_ID_initial,null,this);
+            getSupportLoaderManager().restartLoader(SearchReasultLoader_ID_initial, null, this);
     }
 
     protected void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         adapter = new SearchResultActivity.SimpleItemRecyclerViewAdapter(null);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),1,1,false));
-        if(moreBtn!=null)
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 1, 1, false));
+        if (moreBtn != null)
             moreBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    getSupportLoaderManager().restartLoader(SearchReasultLoader_ID_more ,null,SearchResultActivity.this).forceLoad();
+                    getSupportLoaderManager().restartLoader(SearchReasultLoader_ID_more, null, SearchResultActivity.this).forceLoad();
                 }
             });
     }
@@ -205,33 +216,37 @@ public class SearchResultActivity extends AppCompatActivity
 //         wraper_recycler;
 //        loadingIndicator;
 
-    protected void stateLoading(){
+    protected void stateLoading() {
         moreBtn.setEnabled(false);
         mainFragment_content.setVisibility(View.GONE);
         nothingToShow.setVisibility(View.GONE);
 
         loadingIndicator.setVisibility(View.VISIBLE);
     }
-    protected void stateFinishedLoading(){
+
+    protected void stateFinishedLoading() {
         moreBtn.setEnabled(true);
         mainFragment_content.setVisibility(View.VISIBLE);
 
         loadingIndicator.setVisibility(View.GONE);
     }
-    protected void stateLoadingMore(){
+
+    protected void stateLoadingMore() {
         moreBtn.setEnabled(false);
         loadingIndicator.setVisibility(View.VISIBLE);
     }
-    protected void stateFinishedLoadingMore(){
+
+    protected void stateFinishedLoadingMore() {
         moreBtn.setEnabled(true);
         loadingIndicator.setVisibility(View.GONE);
     }
 
-    protected void stateRecyclerEmpty(){
+    protected void stateRecyclerEmpty() {
         wraper_recycler.setVisibility(View.GONE);
         nothingToShow.setVisibility(View.VISIBLE);
     }
-    protected void stateRecyclerNonEmpty(){
+
+    protected void stateRecyclerNonEmpty() {
         wraper_recycler.setVisibility(View.VISIBLE);
         nothingToShow.setVisibility(View.GONE);
     }
@@ -239,20 +254,18 @@ public class SearchResultActivity extends AppCompatActivity
     @Override
     public Loader<SearchLoader.SearchResult> onCreateLoader(int id, Bundle args) {
 
-        if(id == SearchReasultLoader_ID_initial){
+        if (id == SearchReasultLoader_ID_initial) {
             stateLoading();
-            page =0;
-            return new SearchLoader(this,subject,page);
-        }
-        else if(id == SearchReasultLoader_ID_more){
+            page = 0;
+            return new SearchLoader(this, subject, page);
+        } else if (id == SearchReasultLoader_ID_more) {
             stateLoadingMore();
             page++;
-            return new SearchLoader(this,subject,page);
-        }
-        else if(id == SearchReasultLoader_ID_newQuery){
+            return new SearchLoader(this, subject, page);
+        } else if (id == SearchReasultLoader_ID_newQuery) {
             stateLoading();
-            page =0;
-            return new SearchLoader(this,subject,page);
+            page = 0;
+            return new SearchLoader(this, subject, page);
         }
 
         return null;
@@ -260,19 +273,19 @@ public class SearchResultActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<SearchLoader.SearchResult> loader, SearchLoader.SearchResult data) {
-        if(loader!=null&& data!=null&&data.docs!=null && data.docs.size()>0){
-            if(loader.getId()== SearchReasultLoader_ID_initial){
+        if (loader != null && data != null && data.docs != null && data.docs.size() > 0) {
+            if (loader.getId() == SearchReasultLoader_ID_initial) {
                 adapter.addToDataSet(data.docs);
                 stateRecyclerNonEmpty();
-            }else if(loader.getId() == SearchReasultLoader_ID_more){
+            } else if (loader.getId() == SearchReasultLoader_ID_more) {
                 stateFinishedLoadingMore();
                 adapter.addToDataSet(data.docs);
 
-            }else if(loader.getId() == SearchReasultLoader_ID_newQuery){
+            } else if (loader.getId() == SearchReasultLoader_ID_newQuery) {
                 stateRecyclerNonEmpty();
                 adapter.changeDataSet(data.docs);
             }
-        }else{
+        } else {
             stateRecyclerEmpty();
         }
         stateFinishedLoading();
@@ -284,17 +297,15 @@ public class SearchResultActivity extends AppCompatActivity
     }
 
 
-
-
     @Override
     public void OnConnectionStateChanged(Boolean isOffline) {
-        if(offline_sign!=null)
-            offline_sign.setVisibility(isOffline?View.VISIBLE : View.GONE);
+        if (offline_sign != null)
+            offline_sign.setVisibility(isOffline ? View.VISIBLE : View.GONE);
 
-        if(isOffline){
-            if(snackbar!=null)
+        if (isOffline) {
+            if (snackbar != null)
                 snackbar.dismiss();
-            snackbar = Snackbar.make(SearchResultActivity, "Check your internet connection !", Snackbar.LENGTH_LONG);
+            snackbar = Snackbar.make(SearchResultActivity, getResources().getString(R.string.check_your_internet_connection) , Snackbar.LENGTH_LONG);
             snackbar.show();
         }
     }
@@ -305,28 +316,30 @@ public class SearchResultActivity extends AppCompatActivity
 
         ArrayList<Doc> docs;
 
-        public SimpleItemRecyclerViewAdapter(ArrayList<Doc> docs ) {
+        public SimpleItemRecyclerViewAdapter(ArrayList<Doc> docs) {
             this.docs = docs;
 
         }
 
-        public void changeDataSet(ArrayList<Doc> docs){
-            this.docs =docs;
+        public void changeDataSet(ArrayList<Doc> docs) {
+            this.docs = docs;
             notifyDataSetChanged();
         }
 
-        public void addToDataSet(ArrayList<Doc> docs){
-            if(this.docs !=null)
+        public void addToDataSet(ArrayList<Doc> docs) {
+            if (this.docs != null)
                 this.docs.addAll(docs);
-            else{
+            else {
                 this.docs = new ArrayList<>();
                 this.docs.addAll(docs);
             }
             notifyDataSetChanged();
         }
-        public  ArrayList<Doc> getDataSet(){
+
+        public ArrayList<Doc> getDataSet() {
             return docs;
         }
+
         @Override
         public SearchResultActivity.SimpleItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_book_list_item, parent, false);
@@ -334,7 +347,7 @@ public class SearchResultActivity extends AppCompatActivity
         }
 
         @Override
-        public void onBindViewHolder(final SearchResultActivity.SimpleItemRecyclerViewAdapter.ViewHolder holder, final int position){
+        public void onBindViewHolder(final SearchResultActivity.SimpleItemRecyclerViewAdapter.ViewHolder holder,  int position) {
 
             final String OLID = docs.get(position).edition_key.get(0);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -342,46 +355,48 @@ public class SearchResultActivity extends AppCompatActivity
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putString(BookDetailFragment.OLID_KEY   ,OLID);
-                        arguments.putString(BookDetailFragment.TITLE_KEY ,docs.get(position).title);
+                        arguments.putString(BookDetailFragment.OLID_KEY, OLID);
+                        arguments.putString(BookDetailFragment.TITLE_KEY, docs.get(holder.getAdapterPosition()).title);
                         BookDetailFragment fragment = new BookDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction().replace(R.id.detail, fragment).commit();
                     } else {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, BookDetailActivity.class);
-                        intent.putExtra(BookDetailFragment.OLID_KEY,OLID);
-                        intent.putExtra(BookDetailFragment.TITLE_KEY,docs.get(position).title);
+                        intent.putExtra(BookDetailFragment.OLID_KEY, OLID);
+                        intent.putExtra(BookDetailFragment.TITLE_KEY, docs.get(holder.getAdapterPosition()).title);
                         context.startActivity(intent);
                     }
                 }
             });
 
-            holder.mTitle.setText(docs.get(position).title==null?"N/A":docs.get(position).title);
-            if(docs.get(position).author_name!=null &&docs.get(position).author_name.size()>0)
-            holder.mAuthor.setText(docs.get(position).author_name.get(0));
+            holder.mTitle.setText(docs.get(position).title == null ?getResources().getString(R.string.na) : docs.get(position).title);
+            if (docs.get(position).author_name != null && docs.get(position).author_name.size() > 0)
+                holder.mAuthor.setText(docs.get(position).author_name.get(0));
             else
-                holder.mAuthor.setText("N/A");
+                holder.mAuthor.setText(getResources().getString(R.string.na));
 
             String url;
-            if(docs.get(position).cover_i!=null)
-                url = "https://covers.openlibrary.org/w/id/"+ docs.get(position).cover_i+"-S.jpg";
+            if (docs.get(position).cover_i != null)
+                url = "https://covers.openlibrary.org/w/id/" + docs.get(position).cover_i + "-S.jpg";
             else
-                url = "https://covers.openlibrary.org/b/olid/"+OLID+"-S.jpg";
+                url = "https://covers.openlibrary.org/b/olid/" + OLID + "-S.jpg";
 
 
             //// TODO: 9/7/2017 follow the redirected link of the image
             Picasso.with(holder.itemView.getContext()).load(url)
                     .placeholder(R.drawable.ic_book).error(R.drawable.ic_book).into(holder.mPoster);
-
-            holder.btn_download.setOnClickListener(new View.OnClickListener() {
+            if(!docs.get(holder.getAdapterPosition()).has_fulltext)
+                holder.btn_download.setVisibility(View.GONE);
+            else
+               holder.btn_download.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     final MaterialDialog builder = new MaterialDialog.Builder(holder.itemView.getContext())
-                            .title("Getting Links...").positiveText("Cancel")
-                            .content("please wait").cancelable(false)
+                            .title(getResources().getString(R.string.getting_links)).positiveText(getResources().getString(R.string.cancel))
+                            .content(getResources().getString(R.string.please_wait)).cancelable(false)
                             .progress(true, 100).show();
-                    final BookDetailLoader loader = new BookDetailLoader(holder.itemView.getContext(),docs.get(position).edition_key.get(0));
+                    final BookDetailLoader loader = new BookDetailLoader(holder.itemView.getContext(), docs.get(holder.getAdapterPosition()).edition_key.get(0));
                     final MaterialDialog.Builder d = new MaterialDialog.Builder(holder.itemView.getContext());
 
                     loader.forceLoad();
@@ -396,73 +411,82 @@ public class SearchResultActivity extends AppCompatActivity
                         @Override
                         public void onLoadComplete(Loader<BookDetailLoader.BookDetailResponse> loader, final BookDetailLoader.BookDetailResponse data) {
 
-                            int resID =  (data.ebooks!=null&&data.ebooks.size()>0)?
-                                    R.layout.download_extension_select_dialog :
-                                    R.layout.download_extension_select_dialog_error ;
+                            Boolean hasFormats =false , hasPdf=false,hasEpub=false,hasTxt=false;
+                            int resID;
+                            hasFormats = (data.ebooks != null && data.ebooks.size() > 0 && data.ebooks.get(0)!=null && data.ebooks.get(0).formats!=null);
+                            if(hasFormats){
+                                hasPdf  = data.ebooks.get(0).formats.pdf !=null &&data.ebooks.get(0).formats.pdf.url !=null;
+                                hasEpub = data.ebooks.get(0).formats.epub !=null &&data.ebooks.get(0).formats.epub.url !=null;
+                                hasTxt  = data.ebooks.get(0).formats.text !=null &&data.ebooks.get(0).formats.text.url !=null;
+                                if(hasPdf || hasEpub || hasTxt)
+                                    resID = R.layout.download_extension_select_dialog;
+                                else
+                                    resID = R.layout.download_extension_select_dialog_error;
+                            }else{
+                                resID = R.layout.download_extension_select_dialog_error;
+                            }
 
-                            View dView = LayoutInflater.from(holder.itemView.getContext()).inflate(resID,null,false);
-                            if(resID==R.layout.download_extension_select_dialog){
+                            View dView = LayoutInflater.from(holder.itemView.getContext()).inflate(resID, null, false);
+                            if (resID == R.layout.download_extension_select_dialog) {
+                                View pdf,epub,txt;
+                                pdf = dView.findViewById(R.id.pdf);
+                                epub= dView.findViewById(R.id.epub);
+                                txt=  dView.findViewById(R.id.txt);
+
+                                if( hasPdf )
+                                    pdf.setVisibility(View.VISIBLE);
+                                if( hasEpub )
+                                    epub.setVisibility(View.VISIBLE);
+                                if( hasTxt )
+                                    txt.setVisibility(View.VISIBLE);
                                 View.OnClickListener listener = new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        Boolean isCase = false,success=false;
-                                        switch (view.getId()){
+                                        Boolean isCase = false, success = false;
+                                        switch (view.getId()) {
                                             case R.id.pdf:
-                                                success= ExternalMemoryManager.downloadFile(view.getContext(),".pdf",OLID,
-                                                        docs.get(position).title
-                                                        ,data.ebooks.get(0).formats.pdf.url);
-                                                isCase= true;
+                                                success = ExternalMemoryManager.downloadFile(view.getContext(), ".pdf", OLID,
+                                                        docs.get(holder.getAdapterPosition()).title
+                                                        , data.ebooks.get(0).formats.pdf.url);
+                                                isCase = true;
                                                 break;
                                             case R.id.epub:
-                                                success=ExternalMemoryManager.downloadFile(view.getContext(),".epub",
+                                                success = ExternalMemoryManager.downloadFile(view.getContext(), ".epub",
                                                         OLID,
-                                                        docs.get(position).title,data.ebooks.get(0).formats.epub.url);
-                                                isCase= true;
+                                                        docs.get(holder.getAdapterPosition()).title, data.ebooks.get(0).formats.epub.url);
+                                                isCase = true;
                                                 break;
                                             case R.id.txt:
-                                                success=ExternalMemoryManager.downloadFile(view.getContext(),".txt",
+                                                success = ExternalMemoryManager.downloadFile(view.getContext(), ".txt",
                                                         OLID,
-                                                        docs.get(position).title,data.ebooks.get(0).formats.text.url);
-                                                isCase= true;
+                                                        docs.get(holder.getAdapterPosition()).title, data.ebooks.get(0).formats.text.url);
+                                                isCase = true;
                                                 break;
                                             default:
                                         }
-                                        if(isCase){
-                                            if(snackbar!=null)
+                                        if (isCase) {
+                                            if (snackbar != null)
                                                 snackbar.dismiss();
-                                            if(success){
-                                                snackbar = Snackbar.make(SearchResultActivity, "Starting Download", Snackbar.LENGTH_LONG);
+                                            if (success) {
+                                                snackbar = Snackbar.make(SearchResultActivity, getResources().getString(R.string.starting_download), Snackbar.LENGTH_LONG);
                                                 snackbar.show();
-                                            }else{
-                                                snackbar = Snackbar.make(SearchResultActivity, "Filed to Start Downloading !", Snackbar.LENGTH_LONG);
+                                            } else {
+                                                snackbar = Snackbar.make(SearchResultActivity, getResources().getString(R.string.failed_to_start_download), Snackbar.LENGTH_LONG);
                                                 snackbar.show();
                                             }
                                         }
                                     }
                                 };
-                                View pdf,epub,txt;
-                                pdf =dView.findViewById(R.id.pdf);
-                                epub = dView.findViewById(R.id.epub);
-                                txt =  dView.findViewById(R.id.txt);
 
-                                if(data.ebooks.get(0).formats.pdf!=null && data.ebooks.get(0).formats.pdf.url!=null)
-                                    pdf.setOnClickListener(listener);
-                                else
-                                    pdf.setVisibility(View.GONE);
-                                if(data.ebooks.get(0).formats.epub!=null && data.ebooks.get(0).formats.epub.url!=null)
-                                    epub.setOnClickListener(listener);
-                                else
-                                    epub.setVisibility(View.GONE);
-                                if(data.ebooks.get(0).formats.text!=null && data.ebooks.get(0).formats.text.url!=null)
-                                    txt.setOnClickListener(listener);
-                                else
-                                    txt.setVisibility(View.GONE);
+                                pdf.setOnClickListener(listener);
+                                epub.setOnClickListener(listener);
+                                txt.setOnClickListener(listener);
 
-                                d.positiveText("Cancel");
-                            }else{
-                                d.negativeText("OK");
+                                d.positiveText(getResources().getString(R.string.cancel));
+                            } else {
+                                d.negativeText(getResources().getString(R.string.ok));
                             }
-                            d.customView(dView,true);
+                            d.customView(dView, true);
                             builder.dismiss();
                             d.show();
                         }
@@ -476,7 +500,7 @@ public class SearchResultActivity extends AppCompatActivity
 
         @Override
         public int getItemCount() {
-            Integer i= docs ==null?0: docs.size();;
+            Integer i = docs == null ? 0 : docs.size();
             return i;
         }
 
@@ -486,7 +510,8 @@ public class SearchResultActivity extends AppCompatActivity
             public final TextView mAuthor;
             public final ImageView mPoster;
             public final ImageView btn_download;
-            public ViewHolder(View itemView ) {
+
+            public ViewHolder(View itemView) {
                 super(itemView);
                 this.mTitle = itemView.findViewById(R.id.title_book_card);
                 this.mAuthor = itemView.findViewById(R.id.author_book_card);

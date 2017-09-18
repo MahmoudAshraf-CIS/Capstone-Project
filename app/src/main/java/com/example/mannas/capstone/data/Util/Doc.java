@@ -10,6 +10,18 @@ import java.util.ArrayList;
  */
 
 public class Doc implements Parcelable {
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Doc> CREATOR = new Parcelable.Creator<Doc>() {
+        @Override
+        public Doc createFromParcel(Parcel in) {
+            return new Doc(in);
+        }
+
+        @Override
+        public Doc[] newArray(int size) {
+            return new Doc[size];
+        }
+    };
     public String cover_i;
     public Boolean has_fulltext;
     public Integer edition_count;
@@ -21,10 +33,6 @@ public class Doc implements Parcelable {
     public ArrayList<String> ia;
     public ArrayList<String> author_key;
     public Boolean public_scan_b;
-
-
-
-
 
     protected Doc(Parcel in) {
         cover_i = in.readString();
@@ -114,17 +122,4 @@ public class Doc implements Parcelable {
             dest.writeByte((byte) (public_scan_b ? 0x01 : 0x00));
         }
     }
-
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Doc> CREATOR = new Parcelable.Creator<Doc>() {
-        @Override
-        public Doc createFromParcel(Parcel in) {
-            return new Doc(in);
-        }
-
-        @Override
-        public Doc[] newArray(int size) {
-            return new Doc[size];
-        }
-    };
 }

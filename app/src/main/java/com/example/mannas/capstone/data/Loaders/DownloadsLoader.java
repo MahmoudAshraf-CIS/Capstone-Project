@@ -21,17 +21,18 @@ public class DownloadsLoader extends AsyncTaskLoader<ArrayList<String>> {
     public ArrayList<String> loadInBackground() {
         ArrayList<String> ls = ExternalMemoryManager.getDownloadsFolderFilesPaths();
         ArrayList<String> books = new ArrayList<>();
-        if(ls!=null && ls.size()>0)
-            for(int i=0;i<ls.size();i++){
-                if(isBook(ls.get(i)))
+        if (ls != null && ls.size() > 0)
+            for (int i = 0; i < ls.size(); i++) {
+                if (isBook(ls.get(i)))
                     books.add(ls.get(i));
             }
         else
             return null;
         return books;
     }
-    private Boolean isBook(String name){
-        switch (name.substring(name.lastIndexOf('.'))){
+
+    private Boolean isBook(String name) {
+        switch (name.substring(name.lastIndexOf('.'))) {
             case ".pdf":
                 return true;
             case ".txt":

@@ -1,44 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget"
     android:layout_width="250dp"
     android:layout_height="250dp"
-    android:padding="3dp"
-    android:background="#ffffff"
-    android:id="@+id/widget"
     android:layout_margin="@dimen/widget_margin"
-    >
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:padding="3dp">
 
     <TextView
+        style="@style/TextView_Medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextView_Medium"
-        android:text="@string/suggested_books"
-        android:gravity="center"
         android:layout_margin="5dp"
-        />
+        android:gravity="center"
+        android:text="@string/suggested_books" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginBottom="5dp"
-         android:background="@color/colorAccent"
-        />
+        android:background="@color/colorAccent" />
 
     <LinearLayout
+        android:id="@+id/widget_book"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/poster"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-             android:layout_weight="1"
+            android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:src="@drawable/ic_book"
             android:contentDescription="@string/book_image_description"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_book" />
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -54,7 +53,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Title of the book .." />
+                android:text="@string/title_of_the_book" />
+
             <TextView
                 android:id="@+id/author_book_card"
                 style="@style/article_subtitle"
@@ -63,19 +63,19 @@
                 android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="By AuthorName" />
+                android:text="@string/by_author_name" />
         </LinearLayout>
     </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/colorAccent"
-        />
+        android:background="@color/colorAccent" />
+
     <Button
         android:id="@+id/load_another"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/another"
-        />
+        android:text="@string/another" />
 
 </LinearLayout>

@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    android:id="@+id/master"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/master"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     >
 
     <LinearLayout
         android:id="@+id/content_master"
 
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="70dp"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/offline_sign"
@@ -24,9 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:background="#7AD530"
-            android:text="@string/offline_mode"
             android:gravity="center"
-            />
+            android:text="@string/offline_mode" />
 
         <LinearLayout
             android:id="@+id/wraper_subjects"
@@ -34,8 +31,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:visibility="gone">
+
             <TextView
                 style="@style/TextView_Medium_Link"
                 android:layout_width="match_parent"
@@ -44,6 +42,7 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:text="@string/related_subjects" />
+
             <co.lujun.androidtagview.TagContainerLayout
                 android:id="@+id/subjects_tag_view"
 
@@ -54,12 +53,12 @@
                 app:horizontal_interval="10dp"
                 app:tag_clickable="true"
                 app:vertical_interval="10dp" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/subjects_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                />
+                android:visibility="gone" />
         </LinearLayout>
 
 
@@ -70,22 +69,22 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="gone"
-            >
+            android:visibility="gone">
+
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/ic_book"
-                />
+                android:src="@drawable/ic_book" />
+
             <TextView
-                android:layout_marginTop="10dp"
+                style="@style/TextView_Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/TextView_Medium"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="@string/sorry_the_selected_subject_is_empty"
-                />
+                android:text="@string/sorry_the_selected_subject_is_empty" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/wraper_recycler"
 
@@ -93,64 +92,65 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
+
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/main_recycler"
                 android:name="com.example.mannas.capstone.BookListFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
-                android:id="@+id/main_recycler"
                 tools:context="com.example.mannas.capstone.BookListActivity"
                 tools:listitem="@layout/main_book_list_item" />
+
             <Button
                 android:id="@+id/load_more"
+                style="@style/TextView_Medium_Bold"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:gravity="center"
-                style="@style/TextView_Medium_Bold"
-                android:text="@string/load_more"
-                />
+                android:text="@string/load_more" />
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/loading_indicator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
+
         <com.wang.avi.AVLoadingIndicatorView
+            style="@style/AVLoadingIndicatorView"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="#ffffff"
-            style="@style/AVLoadingIndicatorView"
             android:visibility="visible"
-            app:indicatorName="BallClipRotateIndicator"
             app:indicatorColor="@color/colorAccent"
-            />
+            app:indicatorName="BallClipRotateIndicator" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/nothing_to_show"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="gone"
-        >
-       <ImageView
-           android:layout_width="100dp"
-           android:layout_height="100dp"
-           android:src="@drawable/ic_book"
-           />
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_book" />
+
         <TextView
-            android:layout_marginTop="10dp"
+            style="@style/TextView_Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextView_Medium"
-            android:text="@string/sorry_nothing_to_show"
-            />
+            android:layout_marginTop="10dp"
+            android:text="@string/sorry_nothing_to_show" />
     </LinearLayout>
 
 </FrameLayout>

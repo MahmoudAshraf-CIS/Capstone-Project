@@ -1,8 +1,7 @@
-<android.support.design.widget.CoordinatorLayout
-    android:id="@+id/fragment_book_detail"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_book_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -26,15 +25,16 @@
             app:toolbarId="@+id/toolbar">
 
             <ImageView
-                android:contentDescription="@string/book_image_description"
                 android:id="@+id/cover_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/book_image_description"
                 android:scaleType="centerCrop"
                 android:tint="#11001110"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.9" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="112dp"
@@ -80,7 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="By :- johnny depp" />
+                        />
 
                     <TextView
                         android:id="@+id/publish_date"
@@ -88,7 +88,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="published :- 1984" />
+                         />
 
                     <View
                         android:layout_width="match_parent"
@@ -143,14 +143,15 @@
                         </LinearLayout>
 
                     </LinearLayout>
+
                     <TextView
                         android:id="@+id/view_online"
                         style="@style/TextView_Small"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:drawableBottom="@drawable/online"
                         android:layout_margin="15dp"
+                        android:drawableBottom="@drawable/online"
+                        android:gravity="center"
                         android:text="@string/view_online" />
 
                     <TextView
@@ -159,7 +160,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Is 120 pages" />
+                       />
 
                     <TextView
                         android:id="@+id/notes"
@@ -171,16 +172,19 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:elevation="5dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="10dp">
+
                     <TextView
                         android:id="@+id/textView"
                         style="@style/TextView_Medium_Link"
@@ -188,23 +192,25 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="@string/authors" />
+
                     <co.lujun.androidtagview.TagContainerLayout
                         android:id="@+id/authors_tag_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         app:container_enable_drag="false"
                         app:horizontal_interval="10dp"
                         app:tag_clickable="true"
-                        android:visibility="gone"
                         app:vertical_interval="10dp" />
+
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/authors_recycler_view"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
-                    </LinearLayout>
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
             </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -227,7 +233,6 @@
                         android:text="@string/downloads" />
 
 
-
                     <include
                         android:id="@+id/has_downloads_view"
                         layout="@layout/download_extension_select_dialog"
@@ -240,17 +245,19 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-            android:elevation="5dp">
+                android:elevation="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="10dp">
+
                     <TextView
                         style="@style/TextView_Medium_Link"
                         android:layout_width="match_parent"
@@ -259,6 +266,7 @@
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:text="@string/related_subjects" />
+
                     <co.lujun.androidtagview.TagContainerLayout
                         android:id="@+id/subjects_tag_view"
                         android:layout_width="match_parent"
@@ -268,12 +276,12 @@
                         app:horizontal_interval="10dp"
                         app:tag_clickable="true"
                         app:vertical_interval="10dp" />
+
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/subjects_recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        />
+                        android:visibility="gone" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -288,9 +296,9 @@
         android:layout_gravity="center_vertical|start"
         android:layout_margin="@dimen/fab_margin"
         android:elevation="6dp"
-        app:pressedTranslationZ="6dp"
         app:layout_anchor="@+id/detail"
         app:layout_anchorGravity="top|end"
+        app:pressedTranslationZ="6dp"
 
         app:srcCompat="@drawable/share"
 

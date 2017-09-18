@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">Capstone</string>
     <string name="search">Search</string>
-
     <string name="search_hint">Search Books</string>
     <string name="title_book_detail">Book Detail</string>
     <string name="web_view">web view</string>
-
     <string name="book_image_description">book mage description</string>
     <string name="book_download">book download</string>
-    <string name="getting_links">getting links</string>
+    <string name="getting_links">Getting Links. ..</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
     <string name="error">error</string>
     <string name="authors">Authors</string>
     <string name="related_subjects">Related Subjects</string>
@@ -31,6 +31,27 @@
     <string name="no_downloads">No Downloads</string>
     <string name="suggested_books">Suggested Books</string>
     <string name="another">load another</string>
+    <string name="widget_refreshing_msg">Refreshing widgets</string>
+    <string name="by_na">By :- N/A</string>
+    <string name="na">N/A</string>
+    <string name="notes_na">Notes :- N/A</string>
+    <string name="share_using">Share Using ?</string>
+    <string name="starting_download">Starting Download</string>
+    <string name="failed_to_start_download">Failed to start Download</string>
+    <string name="failed_to_start_download_cant_create_download_folder">Failed to Start Download !/n Can\'t create the download folder.</string>
+    <string name="check_your_internet_connection">Check your internet connection !</string>
+    <string name="please_wait">Please wait</string>
+    <string name="no_handler_for_this_type_of_file">No handler for this type of file.</string>
+    <string name="search_result">Search Result</string>
+    <string name="not_valid_keyword">Not valid keyword ! /n try again.</string>
+    <string name="openLibrary">OpenLibrary</string>
+    <string name="open_library_logo">open library logo</string>
+    <string name="pdf_icon">pdf icon</string>
+    <string name="epub_icon">epub icon</string>
+    <string name="txt_icon">text icon</string>
+    <string name="title_of_the_book">Title of the book ..</string>
+    <string name="by_author_name">By AuthorName</string>
+    <string name="readers">readers</string>
 
 
 </resources>

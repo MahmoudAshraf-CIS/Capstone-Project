@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mannas.capstone">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,34 +28,35 @@
         <activity
             android:name=".BookListActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
-            >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
 
         </activity>
 
         <activity
-            android:launchMode="singleTop"
             android:name=".SearchResultActivity"
             android:label="@string/search"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
 
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
 
         </activity>
 
         <activity
-            android:launchMode="singleTop"
             android:name=".BookDetailActivity"
             android:label="@string/title_book_detail"
+            android:launchMode="singleTop"
             android:parentActivityName=".BookListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -62,9 +65,9 @@
         </activity>
 
         <activity
-            android:launchMode="singleTop"
             android:name=".WebViewActivity"
             android:label="@string/web_view"
+            android:launchMode="singleTop"
             android:parentActivityName=".BookDetailActivity"
             android:theme="@style/AppTheme">
             <meta-data
@@ -72,38 +75,38 @@
                 android:value="com.example.mannas.capstone.BookDetailActivity" />
         </activity>
         <activity
-            android:launchMode="singleTop"
             android:name=".DownloadsActivity"
             android:label="@string/downloads"
+            android:launchMode="singleTop"
             android:parentActivityName=".BookListActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.mannas.capstone.BookListActivity" />
         </activity>
+
         <provider
             android:name=".data.ContentProvider.Provider"
             android:authorities="com.example.mannas.capstone.data.ContentProvider"
-            android:exported="false">
-        </provider>
+            android:exported="false"></provider>
 
         <receiver
             android:name=".connection.ConnectionBroadcastReceiver"
-            android:label="ConnectivityBroadcastReciver"
-            >
-            <intent-filter >
+            android:label="ConnectivityBroadcastReciver">
+            <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
-                <action android:name="android.intent.action.AIRPLANE_MODE"/>
+                <action android:name="android.intent.action.AIRPLANE_MODE" />
 
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".widget.SimpleWidgetProvider" >
+        <receiver android:name=".widget.SimpleWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
+            <meta-data
+                android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info" />
         </receiver>
 

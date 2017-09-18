@@ -13,15 +13,16 @@ import android.webkit.WebViewClient;
 
 public class WebViewActivity extends AppCompatActivity {
     String url;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.web_view_acticity);
-        setTitle("OpenLibrary");
+        setTitle(getResources().getString(R.string.openLibrary));
         WebView myWebView = (WebView) findViewById(R.id.webview);
         myWebView.setWebViewClient(new WebViewClient());
 
-        myWebView.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ELSE_NETWORK );
+        myWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         url = getIntent().getExtras().getString("url");
         myWebView.loadUrl(url);
 

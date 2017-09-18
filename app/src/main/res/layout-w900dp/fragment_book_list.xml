@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
@@ -8,27 +9,27 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context="com.example.mannas.capstone.BookListActivity"
-    android:id="@+id/fragment_main">
+    tools:context="com.example.mannas.capstone.BookListActivity">
 
 
-    <RelativeLayout
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:ads="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android"
 
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="match_parent"
+        android:layout_weight="1"
 
         >
-        <ScrollView
+
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/master"
-            xmlns:android="http://schemas.android.com/apk/res/android">
-            <include layout="@layout/fragment_book_list_master"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include layout="@layout/fragment_book_list_master" />
         </ScrollView>
+
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
 
@@ -37,8 +38,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_test_ad_unit_id"
-            />
+            ads:adUnitId="@string/banner_test_ad_unit_id" />
 
     </RelativeLayout>
 

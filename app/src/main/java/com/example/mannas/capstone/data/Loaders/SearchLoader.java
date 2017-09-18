@@ -21,27 +21,25 @@ import okhttp3.Response;
  */
 
 public class SearchLoader extends AsyncTaskLoader<SearchLoader.SearchResult> {
-    private String LOG_TAG = SubjectLoader.class.getName();
-    private String ERR_DOWNLOADING = "Error downloading",
-            ERR_PARSING ="Error Parsing";
-
-
     String query;
     Integer page;
+    private String LOG_TAG = SubjectLoader.class.getName();
+    private String ERR_DOWNLOADING = "Error downloading",
+            ERR_PARSING = "Error Parsing";
 
     public SearchLoader(Context context, String query, Integer page) {
         super(context);
-        this.query = query.replace(' ','+');
-        this.page = ( page <= 1) ? 1 : page;
+        this.query = query.replace(' ', '+');
+        this.page = (page <= 1) ? 1 : page;
     }
 
     @Override
     public SearchResult loadInBackground() {
-        String response="";
+        String response = "";
         try {
             response = download(getUrl());
         } catch (IOException e) {
-            Log.e(LOG_TAG,ERR_DOWNLOADING);
+            Log.e(LOG_TAG, ERR_DOWNLOADING);
             e.printStackTrace();
         }
 
@@ -52,10 +50,11 @@ public class SearchLoader extends AsyncTaskLoader<SearchLoader.SearchResult> {
         }
         return null;
     }
+
     private String download(String Url) throws IOException {
         Request request = new Request.Builder().url(Url).build();
         Response response = (new OkHttpClient()).newCall(request).execute();
-        if(response!=null && response.body()!=null){
+        if (response != null && response.body() != null) {
             String s = response.body().string();
             return s;
         }
@@ -63,11 +62,11 @@ public class SearchLoader extends AsyncTaskLoader<SearchLoader.SearchResult> {
         return null;
     }
 
-    private SearchResult parse(String json) throws Exception{
-        return new Gson().fromJson(json,SearchResult.class);
+    private SearchResult parse(String json) throws Exception {
+        return new Gson().fromJson(json, SearchResult.class);
     }
 
-    private String getUrl(){
+    private String getUrl() {
         //http://openlibrary.org/search.json?q=the+lord&page=2
         return "http://openlibrary.org/search.json?q=" +
                 query +
@@ -76,6 +75,18 @@ public class SearchLoader extends AsyncTaskLoader<SearchLoader.SearchResult> {
     }
 
     public static class SearchResult implements Parcelable {
+        @SuppressWarnings("unused")
+        public static final Parcelable.Creator<SearchResult> CREATOR = new Parcelable.Creator<SearchResult>() {
+            @Override
+            public SearchResult createFromParcel(Parcel in) {
+                return new SearchResult(in);
+            }
+
+            @Override
+            public SearchResult[] newArray(int size) {
+                return new SearchResult[size];
+            }
+        };
         public Integer start;
         public Integer num_found;
         public ArrayList<Doc> docs;
@@ -117,19 +128,6 @@ public class SearchLoader extends AsyncTaskLoader<SearchLoader.SearchResult> {
                 dest.writeList(docs);
             }
         }
-
-        @SuppressWarnings("unused")
-        public static final Parcelable.Creator<SearchResult> CREATOR = new Parcelable.Creator<SearchResult>() {
-            @Override
-            public SearchResult createFromParcel(Parcel in) {
-                return new SearchResult(in);
-            }
-
-            @Override
-            public SearchResult[] newArray(int size) {
-                return new SearchResult[size];
-            }
-        };
     }
 
 }

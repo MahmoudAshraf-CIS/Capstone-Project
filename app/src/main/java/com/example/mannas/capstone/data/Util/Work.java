@@ -10,6 +10,18 @@ import java.util.ArrayList;
  */
 
 public class Work implements Parcelable {
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Work> CREATOR = new Parcelable.Creator<Work>() {
+        @Override
+        public Work createFromParcel(Parcel in) {
+            return new Work(in);
+        }
+
+        @Override
+        public Work[] newArray(int size) {
+            return new Work[size];
+        }
+    };
     public Boolean printdisabled;
     public String cover_id;
     public ArrayList<String> ia_collection;
@@ -28,10 +40,7 @@ public class Work implements Parcelable {
     public String lending_identifier;
     public ArrayList<String> subject;
 
-    public Work(){}
-    public String getCoverUrl(Character S_M_L){
-        return "https://covers.openlibrary.org/b/id/"+
-                cover_id +"-"+S_M_L+".jpg";
+    public Work() {
     }
 
     protected Work(Parcel in) {
@@ -72,6 +81,11 @@ public class Work implements Parcelable {
         } else {
             subject = null;
         }
+    }
+
+    public String getCoverUrl(Character S_M_L) {
+        return "https://covers.openlibrary.org/b/id/" +
+                cover_id + "-" + S_M_L + ".jpg";
     }
 
     @Override
@@ -139,17 +153,4 @@ public class Work implements Parcelable {
             dest.writeList(subject);
         }
     }
-
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Work> CREATOR = new Parcelable.Creator<Work>() {
-        @Override
-        public Work createFromParcel(Parcel in) {
-            return new Work(in);
-        }
-
-        @Override
-        public Work[] newArray(int size) {
-            return new Work[size];
-        }
-    };
 }

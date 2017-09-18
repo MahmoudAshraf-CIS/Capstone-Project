@@ -8,11 +8,22 @@ import android.os.Parcelable;
  */
 
 public class Publisher implements Parcelable {
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Publisher> CREATOR = new Parcelable.Creator<Publisher>() {
+        @Override
+        public Publisher createFromParcel(Parcel in) {
+            return new Publisher(in);
+        }
+
+        @Override
+        public Publisher[] newArray(int size) {
+            return new Publisher[size];
+        }
+    };
     public Integer count;
     public String name;
     public String key;
     public String url;
-
 
     protected Publisher(Parcel in) {
         count = in.readByte() == 0x00 ? null : in.readInt();
@@ -38,17 +49,4 @@ public class Publisher implements Parcelable {
         dest.writeString(key);
         dest.writeString(url);
     }
-
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Publisher> CREATOR = new Parcelable.Creator<Publisher>() {
-        @Override
-        public Publisher createFromParcel(Parcel in) {
-            return new Publisher(in);
-        }
-
-        @Override
-        public Publisher[] newArray(int size) {
-            return new Publisher[size];
-        }
-    };
 }

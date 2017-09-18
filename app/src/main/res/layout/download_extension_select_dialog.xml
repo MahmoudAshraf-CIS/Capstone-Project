@@ -1,42 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ImageView
+        android:contentDescription="@string/open_library_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/open_lib"
         android:layout_gravity="center"
-        />
+        android:src="@drawable/open_lib" />
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="150dp"
+        android:orientation="horizontal">
+
         <ImageView
+            android:contentDescription="@string/pdf_icon"
             android:id="@+id/pdf"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:src="@drawable/pdf"
             android:layout_margin="15dp"
-            />
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:src="@drawable/pdf" />
+
         <ImageView
+            android:contentDescription="@string/epub_icon"
             android:id="@+id/epub"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:src="@drawable/epub"
             android:layout_margin="20dp"
-            />
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:src="@drawable/epub" />
+
         <ImageView
+            android:contentDescription="@string/txt_icon"
             android:id="@+id/txt"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:src="@drawable/txt"
             android:layout_margin="20dp"
-            />
+            android:visibility="gone"
+            android:layout_weight="1"
+            android:src="@drawable/txt" />
     </LinearLayout>
 
 </LinearLayout>

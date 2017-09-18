@@ -1,51 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:id="@+id/activity_downloads"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_downloads"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-   <LinearLayout
-       android:orientation="vertical"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
+    android:orientation="vertical">
 
-       <LinearLayout
-           android:id="@+id/loading_indicator"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:gravity="center"
-            >
-           <com.wang.avi.AVLoadingIndicatorView
-               android:layout_width="60dp"
-               android:layout_height="60dp"
-               android:background="#ffffff"
-               style="@style/AVLoadingIndicatorView"
-               android:visibility="visible"
-               app:indicatorName="BallPulseIndicator"
-               app:indicatorColor="@color/colorAccent"
-               />
-       </LinearLayout>
-       <TextView
-           android:id="@+id/no_downloads"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           style="@style/TextView_Medium"
-           android:text="@string/no_downloads"
-           android:gravity="center"
-           />
-       <android.support.v7.widget.RecyclerView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginLeft="11dp"
-           android:layout_marginRight="11dp"
-           android:layout_marginTop="16dp"
-           android:id="@+id/downloads_recycler"
-           tools:context="com.example.mannas.capstone.BookListActivity"
-           tools:listitem="@layout/downloads_item">
+        <LinearLayout
+            android:id="@+id/loading_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
-       </android.support.v7.widget.RecyclerView>
-   </LinearLayout>
+            <com.wang.avi.AVLoadingIndicatorView
+                style="@style/AVLoadingIndicatorView"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="#ffffff"
+                android:visibility="visible"
+                app:indicatorColor="@color/colorAccent"
+                app:indicatorName="BallPulseIndicator" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/no_downloads"
+            style="@style/TextView_Medium"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/no_downloads" />
+
+        <android.support.v7.widget.RecyclerView
+
+            android:id="@+id/downloads_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+            android:layout_marginTop="16dp"
+            tools:context="com.example.mannas.capstone.BookListActivity"
+            tools:listitem="@layout/downloads_item">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
 </ScrollView>
